@@ -9,34 +9,27 @@ if (isset($_POST['name']) and isset($_POST['email']) and isset($_POST['age']) an
     $qual = $_POST['qual'];
     if (($echeck = User::everify($email))) {
         $error = User::regis($name, $email, $age, $dob, $address, $qual);
-    }     
+    }
     $signup = true;
 }
 if ($signup) {
 
     if ($error) {
-    ?>
+?>
         <main class="container">
-	<div class="bg-light p-5 rounded mt-3">
-		<h1>Your Registration Success</h1>
-		<p class="lead">Now you Go to Userform <a
-				href="index.php">here</a>.
-		</p>
+            <div class="bg-light p-5 rounded mt-3">
+                <h1>Your Registration Success</h1>
+                <p class="lead">Now you Go to Userform <a href="index.php">here</a>.
+                </p>
 
-	</div>
-</main>
+            </div>
+        </main>
     <?php
     } else {
     ?>
-          <main class="container">
-	<div class="bg-light p-5 rounded mt-3">
-		<h1>Check Your Email</h1>
-		<p class="lead">Retry Again <a
-				href="reg.php">here</a>.
-		</p>
-
-	</div>
-</main>
+        <script>
+            window.location.href = "/reg.php?error=1"
+        </script>
     <?php
     }
 } else {
@@ -57,6 +50,15 @@ if ($signup) {
             <form method="post" action="reg.php">
                 <img class="mb-4" src="https://git.selfmade.ninja/uploads/-/system/appearance/logo/1/Logo_Dark.png" alt="" height="50">
                 <h1 class="h3 mb-4 mw-normal">User Registration Form</h1>
+                <?
+                if (isset($_GET['error'])) {
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        Invalid Credentials
+                    </div>
+                <?
+                }
+                ?>
                 <div class="form-floating">
                     <input name="name" type="text" class="form-control" id="floatingInputUsername" placeholder="name@example.com" required>
                     <label for="floatingInputUsername">Name</label>
@@ -91,3 +93,14 @@ if ($signup) {
 }
 ?>
 
+
+<!--
+     <main class="container">
+	<div class="bg-light p-5 rounded mt-3">
+		<h1>Check Your Email</h1>
+		<p class="lead">Retry Again <a
+				href="reg.php">here</a>.
+		</p>
+        </div>
+</main>
+-->

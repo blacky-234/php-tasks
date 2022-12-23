@@ -4,5 +4,5 @@ include_once 'includes/User.class.php';
 
 function loadtemplates($name)
 {
-    include $_SERVER['DOCUMENT_ROOT']."/templates/$name.php";
+    include $_SERVER['DOCUMENT_ROOT']."/_templates/$name.php";
 }
